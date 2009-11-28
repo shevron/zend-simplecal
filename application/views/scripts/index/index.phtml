@@ -1,0 +1,17 @@
+<?php 
+$thisMonth = $this->calendar->getStartTime();
+$nextMonth = strtotime('+1 month', $thisMonth);
+$prevMonth = strtotime('-1 month', $thisMonth);
+?>
+<div class="calendar">
+    <h2><?php echo date("F Y", $thisMonth); ?></h2>
+    <div class="calendar-toolbar">
+        <a href="<?php echo $this->baseUrl . '/month/' . date("Y/m", $prevMonth) ?>">&laquo; prev</a>
+        <a href="<?php echo $this->baseUrl . '/month/' . date("Y/m", $_SERVER['REQUEST_TIME']) ?>">today</a>
+        <a href="<?php echo $this->baseUrl . '/month/' . date("Y/m", $nextMonth) ?>">next &raquo;</a>
+        <form method="get">
+            go to: <input type="text" name="jumpto" />
+        </form>
+    </div>
+    <?php echo $this->renderMonthCalendar($this->calendar); ?>
+</div>

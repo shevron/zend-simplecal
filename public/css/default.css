@@ -1,0 +1,73 @@
+body {
+	font-family: Georgia, sans-serif;
+	padding: 0px;
+	margin: 0px;
+}
+
+/**
+ * Header, Footer, Content
+ */
+
+#page-title {
+	padding: 1em;
+	background-color: #eee;
+}
+
+#page-title h1 {
+	margin: 0px;
+}
+
+#page-content {
+	padding: 1em;
+}
+
+#page-footer {
+	font-size: 9pt;
+	color: #999;
+	text-align: center;
+	margin-top: 1em;
+	padding: 1em;
+}
+
+/**
+ * Month Calendar
+ */
+
+.calendar h2 {
+    float: left;
+    margin: 0 0.6em 0.5em 0;
+}
+
+.calendar .calendar-toolbar {
+    float: left;
+    padding: 0.4em;   
+}
+
+.calendar .calendar-toolbar form {
+    display: inline;
+    padding-left: 1em;
+}
+
+.calendar .monthCalendar {
+	clear: both;
+}
+
+.monthCalendar td {
+	font-size: 10pt;
+	width: 100px;
+	border: 1px solid black;
+}
+
+.monthCalendar td.day {
+	vertical-align: top;
+	height: 5em;
+}
+
+.monthCalendar td.out-of-scope {
+	color: #aaa;
+}
+
+.monthCalendar td.today {
+	background-color: #eef;
+}
+
