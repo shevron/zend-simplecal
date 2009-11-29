@@ -62,16 +62,16 @@ body {
 	clear: both;
 }
 
+.monthCalendar th {
+    font-size: 11pt;
+}
+
 .monthCalendar td {
 	font-size: 10pt;
 	width: 120px;
 	border: 1px solid black;
-}
-
-.monthCalendar td.day {
-	vertical-align: top;
-	height: 6em;
-	   cursor: pointer;
+    vertical-align: top;
+    height: 6em;
 }
 
 .monthCalendar td.out-of-scope {
@@ -102,4 +102,11 @@ body {
 	background-color: #e0ffe0;
 	-moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+}
+
+.monthCalendar td span.day-add a {
+	float: right;
+	padding: 1px;
+	font-size: 8pt;
+	color: #44AA44;
 }

@@ -24,7 +24,7 @@ class SimpleCal_View_Helper_RenderMonthCalendar extends Zend_View_Helper_Abstrac
         // Draw weekdays header
         $html .= '<tr class="weekdays">';
         for ($i = 0; $i < 7; $i++) {
-            $html .= '<td>' . self::$_wdays[($startDay + $i) % 7] . '</td>';
+            $html .= '<th>' . self::$_wdays[($startDay + $i) % 7] . '</th>';
         }
         $html .= '</tr>';
         
@@ -39,12 +39,17 @@ class SimpleCal_View_Helper_RenderMonthCalendar extends Zend_View_Helper_Abstrac
                     $inMonth = true;
                 }
                 
+                $dayDate = date("Y-m-d", $day);
                 $mday = date('j', $day);
-                $events = $cal->getEventsForDay($mday);
+                $events = $cal->getEventsForDay($mday);                
+                
                 $class = ($inMonth ? '' : ' out-of-scope');
                 if ($this->_isToday($day)) $class .= ' today';
                 if (! empty($events)) $class .= ' has-events';
-                $html .= '<td class="day' . $class . '">' . $mday; 
+                
+                $html .= '<td class="day' . $class . '" id="cal-day-' . $dayDate . 
+                    '"><span class="day-title">' . $mday . '</span><span class="day-add">' . 
+                    "<a href=\"{$this->view->baseUrl}/event/create/day/{$dayDate}\">+</a></span>"; 
                     
                 if (! empty($events)) {
                     $html .= '<ul>';
