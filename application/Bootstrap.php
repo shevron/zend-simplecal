@@ -7,20 +7,32 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Ensure front controller instance is present, and fetch it
         $this->bootstrap('FrontController');
         $front = $this->getResource('FrontController'); /* @var $front Zend_Controller_Front */
-
+        
         // Set up routes
         $front->getRouter()->addConfig(
             new Zend_Config(include APPLICATION_PATH . '/configs/routes.php')
         );
         
-        // Initialize the request object
+        // Initialize and set the request object
         $request = new Zend_Controller_Request_Http();
-
-        // Add it to the front controller
         $front->setRequest($request);
-
+        
         // Bootstrap will store this value in the 'request' key of its container
         return $request;
+    }
+    
+    protected function _initResponse()
+    {
+        // Ensure front controller instance is present, and fetch it
+        $this->bootstrap('FrontController');
+        $front = $this->getResource('FrontController'); /* @var $front Zend_Controller_Front */
+        
+        // Initialize and set the response object
+        $response = new Zend_Controller_Response_Http();
+        $response->setHeader('Content-Type', 'text/html; charset=UTF-8', true);
+        $front->setResponse($response);
+        
+        return $response;
     }
     
     protected function _initView()
@@ -29,6 +41,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         // Initialize view
         $view = new Zend_View();
+        $view->setEncoding('UTF-8');
         $view->doctype('XHTML1_STRICT');
         $view->headTitle()->setSeparator(' » ');
 
@@ -45,15 +58,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headLink()->appendStylesheet($view->baseUrl . '/css/default.css');
 
         // Set user info
-//        $session = $this->getResource('session');
-//        $view->userLoggedIn = $session->logged_in;
-//        $view->userInfo = $session->user;
+        /*
+        $session = $this->getResource('session');
+        $view->userLoggedIn = $session->logged_in;
+        $view->userInfo = $session->user;
+        */
         
         $view->addHelperPath(APPLICATION_PATH . '/views/helpers', 'SimpleCal_View_Helper_');
-        
-        /**
-         * @todo Add Dojo?
-         */
         
         // Return it, so that it can be stored by the bootstrap
         return $view;

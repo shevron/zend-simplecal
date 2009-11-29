@@ -46,4 +46,21 @@ class SimpleCal_Model_Calendar_Month extends SimpleCal_Model_Calendar
         $diffDays = ($startDay + 6 - $endDateInfo['wday']) % 7;
         return $this->_endTime + ($diffDays * 3600 * 24);
     }
+    
+    public function getEventsForDay($day)
+    {
+        $this->_loadEvents();
+        if (isset($this->_events[$day])) {
+            return $this->_events[$day];
+        } else {
+            return array();
+        }
+    }
+    
+    protected function _loadEvent(SimpleCal_Model_Event $event)
+    {
+        $eventDay = (int) date('j', $event->getStartTime());
+        if (! isset($this->_events[$eventDay])) $this->_events[$eventDay] = array();
+        $this->_events[$eventDay][] = $event;
+    }
 }

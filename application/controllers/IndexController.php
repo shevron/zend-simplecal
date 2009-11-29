@@ -15,6 +15,9 @@ class IndexController extends Zend_Controller_Action
         $cal = null;
         
         if (($jumpTo = $this->_getParam('jumpto')) !== null) {
+            /**
+             * @todo Filter unsafe input before putting into strtotime() 
+             */
             $jumpTo = strtotime($jumpTo);
             if ($jumpTo) {
                 $cal = new SimpleCal_Model_Calendar_Month(date("n", $jumpTo), date("Y", $jumpTo));
@@ -28,8 +31,6 @@ class IndexController extends Zend_Controller_Action
         if (! $cal) {
             $cal = new SimpleCal_Model_Calendar_Month($month, $year);
         }
-        
-        $cal->loadEvents();
         
         $this->view->calendar = $cal;
     }

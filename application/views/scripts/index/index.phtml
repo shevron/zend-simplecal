@@ -1,10 +1,20 @@
 <?php 
+
+/**
+ * Main month view template file
+ * 
+ */
+
 $thisMonth = $this->calendar->getStartTime();
 $nextMonth = strtotime('+1 month', $thisMonth);
 $prevMonth = strtotime('-1 month', $thisMonth);
+
+$monthTitle = date("F Y", $thisMonth);
+$this->headTitle($monthTitle);
+
 ?>
 <div class="calendar">
-    <h2><?php echo date("F Y", $thisMonth); ?></h2>
+    <h2><?php echo $monthTitle; ?></h2>
     <div class="calendar-toolbar">
         <a href="<?php echo $this->baseUrl . '/month/' . date("Y/m", $prevMonth) ?>">&laquo; prev</a>
         <a href="<?php echo $this->baseUrl . '/month/' . date("Y/m", $_SERVER['REQUEST_TIME']) ?>">today</a>

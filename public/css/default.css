@@ -11,12 +11,22 @@ body {
 #page-title {
 	padding: 1em;
 	background-color: #eee;
+	height: 2.5em;
+	clear: both;
 }
 
 #page-title h1 {
 	margin: 0px;
+    float: left;
 }
 
+#page-title .title-toolbox {
+	font-size: 10pt;
+    float: right;
+    margin: 1em;
+    clear: right;
+}
+	
 #page-content {
 	padding: 1em;
 }
@@ -54,20 +64,42 @@ body {
 
 .monthCalendar td {
 	font-size: 10pt;
-	width: 100px;
+	width: 120px;
 	border: 1px solid black;
 }
 
 .monthCalendar td.day {
 	vertical-align: top;
-	height: 5em;
+	height: 6em;
+	   cursor: pointer;
 }
 
 .monthCalendar td.out-of-scope {
 	color: #aaa;
+	border-color: #999;
 }
 
 .monthCalendar td.today {
 	background-color: #eef;
 }
 
+.monthCalendar td.has-events {
+	font-weight: bold;
+}
+
+.monthCalendar td ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 8pt;
+	font-weight: normal;
+}
+
+.monthCalendar td ul li {
+	padding: 1px;
+	margin: 1px 0;
+	border: 1px solid #a0e0a0;
+	background-color: #e0ffe0;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}

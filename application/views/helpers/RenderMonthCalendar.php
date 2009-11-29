@@ -39,11 +39,24 @@ class SimpleCal_View_Helper_RenderMonthCalendar extends Zend_View_Helper_Abstrac
                     $inMonth = true;
                 }
                 
+                $mday = date('j', $day);
+                $events = $cal->getEventsForDay($mday);
                 $class = ($inMonth ? '' : ' out-of-scope');
                 if ($this->_isToday($day)) $class .= ' today';
-                
-                $html .= '<td class="day' . $class . '">' . 
-                    date('j', $day) . '</td>';
+                if (! empty($events)) $class .= ' has-events';
+                $html .= '<td class="day' . $class . '">' . $mday; 
+                    
+                if (! empty($events)) {
+                    $html .= '<ul>';
+                    foreach($events as $event) { /* @var $event SimpleCal_Model_Event */
+                        $html .= '<li>' .
+                            $this->view->dateFormatter($event->getStartTime())->hour() . " " . 
+                            htmlspecialchars($event->getTitle()) . '</li>';
+                    }
+                    $html .= '</ul>';
+                }
+                    
+                $html .= '</td>';
                 
                 $day += 24 * 3600;
             }
