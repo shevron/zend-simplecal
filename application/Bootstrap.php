@@ -65,6 +65,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         */
         
         $view->addHelperPath(APPLICATION_PATH . '/views/helpers', 'SimpleCal_View_Helper_');
+        Zend_Dojo::enableView($view);
         
         // Return it, so that it can be stored by the bootstrap
         return $view;
