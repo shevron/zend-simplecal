@@ -1,5 +1,5 @@
 body {
-	font-family: Georgia, sans-serif;
+	font-family: Georgia, serif;
 	padding: 0px;
 	margin: 0px;
 }
@@ -109,4 +109,45 @@ body {
 	padding: 1px;
 	font-size: 8pt;
 	color: #44AA44;
+}
+
+/**
+ * Forms
+ */
+
+dl.form-container {
+	padding: 0;
+	margin: 0;
+}
+
+dl.form-container dt {
+	float: left;
+	width: 8em;
+	text-align: right;
+	padding: 1em 1em 0 0;
+}
+
+dl.form-container dd {
+	clear: right;
+	padding-top: 1em;
+}
+
+dl.form-container dt .required {
+	text-decoration: underline;
+}
+
+dl.form-container ul.errors {
+	list-style-type: none;
+	font-size: 9pt;
+	padding: 0px;
+	margin: 0.2em;
+	margin-left: 9em;
+	color: #c44;
+}
+/**
+ * Dojo / Dijit overrides
+ */
+
+.dijitPopup {
+    font-size: 9pt !important;	
 }

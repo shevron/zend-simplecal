@@ -17,17 +17,17 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\n" . $this->doctype();
     <?php echo $this->headLink(); ?> 
     <?php if ($this->dojo()->isEnabled()) {
         $this->dojo()->setCdnBase(Zend_Dojo::CDN_BASE_GOOGLE)
-                     ->addStyleSheetModule('dijit.themes.tundra');
+                     ->addStyleSheetModule('dijit.themes.nihilo');
         echo $this->dojo();
     } ?> 
     <?php echo $this->headScript() ?>
 </head>
 
-<body>
+<body class="nihilo">
     <div id="page-title">
         <h1>My Simple Calendar</h1>
         <div class="title-toolbox">
-            timezone: <?php echo date_default_timezone_get() ?>
+            timezone: <?php echo date_default_timezone_get() ?> 
             <a href="<?php echo $this->baseUrl ?>/timezone">[ change... ]</a>
         </div>
     </div>

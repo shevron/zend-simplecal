@@ -49,7 +49,7 @@ class SimpleCal_View_Helper_RenderMonthCalendar extends Zend_View_Helper_Abstrac
                 
                 $html .= '<td class="day' . $class . '" id="cal-day-' . $dayDate . 
                     '"><span class="day-title">' . $mday . '</span><span class="day-add">' . 
-                    "<a href=\"{$this->view->baseUrl}/event/create/day/{$dayDate}\">+</a></span>"; 
+                    "<a href=\"{$this->view->baseUrl}/event/create/date/{$dayDate}\">+</a></span>"; 
                     
                 if (! empty($events)) {
                     $html .= '<ul>';
