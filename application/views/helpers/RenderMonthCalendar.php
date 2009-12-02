@@ -40,15 +40,14 @@ class SimpleCal_View_Helper_RenderMonthCalendar extends Zend_View_Helper_Abstrac
                 }
                 
                 $dayDate = date("Y-m-d", $day);
-                $mday = date('j', $day);
-                $events = $cal->getEventsForDay($mday);                
+                $events = $cal->getEventsForDay($dayDate);                
                 
                 $class = ($inMonth ? '' : ' out-of-scope');
                 if ($this->_isToday($day)) $class .= ' today';
                 if (! empty($events)) $class .= ' has-events';
                 
                 $html .= '<td class="day' . $class . '" id="cal-day-' . $dayDate . 
-                    '"><span class="day-title">' . $mday . '</span><span class="day-add">' . 
+                    '"><span class="day-title">' . date('j', $day) . '</span><span class="day-add">' . 
                     "<a href=\"{$this->view->baseUrl}/event/create/date/{$dayDate}\">+</a></span>"; 
                     
                 if (! empty($events)) {

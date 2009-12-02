@@ -59,7 +59,7 @@ class SimpleCal_Model_Calendar_Month extends SimpleCal_Model_Calendar
     
     protected function _loadEvent(SimpleCal_Model_Event $event)
     {
-        $eventDay = (int) date('j', $event->getStartTime());
+        $eventDay = date('Y-m-d', $event->getStartTime());
         if (! isset($this->_events[$eventDay])) $this->_events[$eventDay] = array();
         $this->_events[$eventDay][] = $event;
     }

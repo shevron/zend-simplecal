@@ -21,18 +21,12 @@ abstract class SimpleCal_Model_Calendar
     protected function _loadEvents()
     {
         if ($this->_events === null) {
-            $db = Zend_Db_Table::getDefaultAdapter();
-            $select = $db->select()
-                         ->from('events')
-                         ->where('start_time >= ' . $this->_startTime)
-                         ->where('start_time <= ' . $this->_endTime)
-                         ->order('start_time');
-                         
-            $stmt = $select->query();
+            $events = SimpleCal_Model_Event::findEventsByTime(
+                $this->_startTime, $this->_endTime
+            );
             
-            $this->_events = array();
-            while ($row = $stmt->fetch(Zend_Db::FETCH_ASSOC)) {
-                $this->_loadEvent(new SimpleCal_Model_Event($row));
+            foreach($events as $event) {
+                $this->_loadEvent($event);
             }
         }
     }

@@ -23,12 +23,17 @@ class EventController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $params = $this->_getAllParams();
             if ($form->isValid($params)) {
+                
+                $startTime = strtotime($form->getValue('date') . " " . $form->getValue('time'));
+                
                 $event = new SimpleCal_Model_Event(array(
-                    'start_time' => strtotime($form->getValue('date')),
-                    
+                    'start_time'  => $startTime,
+                    'end_time'    => $startTime + 1800, // TODO: Implement this!
+                    'title'       => $form->getValue('title'),
+                    'description' => $form->getValue('description')
                 ));
                 
-                // SAVE IT!
+                $event->save();
                 
                 $month = date("Y/m", $event->getStartTime());
                 if ($month) {
