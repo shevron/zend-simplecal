@@ -1,0 +1,10 @@
+= Zend Simple Calendar 
+(yes, we still need a cool name!)
+
+A simple Zend Framework and Zend Server APIs based calendar application,
+built in order to demonstrate these two products and the possible 
+integration between them. 
+
+Zend Simple Calendar is copyright (C) 2009 Zend Technologies LTD
+Please see LICENSE for licensing information
+
