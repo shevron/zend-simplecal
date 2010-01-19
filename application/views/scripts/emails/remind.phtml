@@ -1,0 +1,16 @@
+<?php
+$startDate = new Zend_Date();
+$startDate->set($this->event->getStartTime());
+$endDate = new Zend_Date();
+$endDate->set($this->event->getEndTime());
+
+?>Reminder: <?= $this->event->getTitle() ?>.
+
+<?php if($this->event->getDescription() != ''): ?>
+<?= $this->event->getDescription() ?>
+<?php endif ?>
+
+
+Starting: <?= $startDate ?>
+
+Ending: <?= $endDate ?>

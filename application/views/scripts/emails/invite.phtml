@@ -1,0 +1,19 @@
+<?php
+$startDate = new Zend_Date();
+$startDate->set($this->event->getStartTime());
+$endDate = new Zend_Date();
+$endDate->set($this->event->getEndTime());
+
+?>You have been invited to attend <?= $this->event->getTitle() ?>.
+
+<?php if($this->event->getDescription() != ''): ?>
+<?= $this->event->getDescription() ?>
+<?php endif ?>
+
+
+Starting: <?= $startDate ?>
+
+Ending: <?= $endDate ?>
+
+
+If you would like to be sent a reminder email, <a href="<?= $this->inviteUrl ?>">go here</a>.
