@@ -15,11 +15,14 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 /** Zend_Application */
-require_once 'Zend/Application.php';  
+require_once 'Zend/Application.php';
+
+// TODO: why isn't this catched by the autoloader?
+require_once 'SimpleCal/Exception.php';
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(
-    APPLICATION_ENV, 
+    APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
 $application->bootstrap()

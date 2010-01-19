@@ -33,5 +33,6 @@ class IndexController extends Zend_Controller_Action
         }
         
         $this->view->calendar = $cal;
+        $this->view->dojo()->enable();
     }
 }

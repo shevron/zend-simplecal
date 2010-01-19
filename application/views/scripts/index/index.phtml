@@ -13,6 +13,21 @@ $monthTitle = date("F Y", $thisMonth);
 $this->headTitle($monthTitle);
 
 ?>
+
+<script type="text/javascript">
+  dojo.require("dijit.Dialog");
+  dojo.require("dijit.form.TextBox");  
+  dojo.require("dijit.form.TimeTextBox");
+  dojo.require("dijit.form.Button");
+  dojo.require("dijit.form.DateTextBox");
+  dojo.require("dijit.form.FilteringSelect");
+
+  dojo.addOnLoad(function() {
+	  dojo.parser.parse();
+  });
+</script>
+
+
 <div class="calendar">
     <h2><?php echo $monthTitle; ?></h2>
     <div class="calendar-toolbar">

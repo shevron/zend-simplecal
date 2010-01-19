@@ -10,7 +10,9 @@ class SimpleCal_Model_Event
         'start_time'  => null,
         'end_time'    => null,
         'title'       => null,
+        'reminder'    => null,
         'description' => null,
+        'invite'      => null,
         'flags'       => 0
     );
     
@@ -47,6 +49,10 @@ class SimpleCal_Model_Event
     {
         return $this->_data['start_time'];
     }
+    
+    public function getStartTimeMonth() {
+        return date("Y/m", $this->_data['start_time']);
+    }
 
 	/**
      * @return the $_endTime
@@ -62,6 +68,18 @@ class SimpleCal_Model_Event
     public function getTitle()
     {
         return $this->_data['title'];
+    }
+    
+	/**
+     * @return string
+     */
+    public function getInvite()
+    {
+        return $this->_data['invite'];
+    }
+    
+    public function getInvitationEmails() {
+        return explode(',', $this->_data['invite']);
     }
 
 	/**
@@ -129,7 +147,7 @@ class SimpleCal_Model_Event
      */
     public function save()
     {
-        if (isset($this->_id)) {
+        if (isset($this->_id) && $this->_id > 0) {
             // Update
             $this->_getTable()->update(
                 $this->toArray(), 
@@ -144,6 +162,26 @@ class SimpleCal_Model_Event
             
             $this->_id = $this->_getTable()->getLastInsertId();
         }
+    }
+    
+    public function delete() {
+        $table = $this->_getTable();
+        $where = $table->getAdapter()->quoteInto('id = ?', $this->_id);
+        $table->delete($where);
+        $this->_id = null;
+    }
+    
+    public function getFormContainer() {
+        $data = $this->_data;
+
+        $data['date'] = date('Y-m-d', $data['start_time']);
+        $data['time'] = date('\TH:i:s', $data['start_time']);
+        
+        unset($data['start_time']);
+        unset($data['end_time']);
+        unset($data['flags']);
+        
+        return $data;
     }
     
     public function toArray($returnId = false)
@@ -179,6 +217,11 @@ class SimpleCal_Model_Event
             $this->_data['flags'] &= ~$flag;
         }
     }
+    
+    public function getReminderTime() {
+        // TODO: reminder time should not be before now!
+        return date('Y-m-d H:i:s', $this->_data['start_time'] - (60 * 60 * $this->_data['reminder']));
+    }
 
     /**
      * Get list of events between the specified start & end times
@@ -202,5 +245,30 @@ class SimpleCal_Model_Event
         }
         
         return $ret;
+    }
+    
+    /**
+     * Returns an instance of SimpleCal_Model_Event, event id has to be provided
+     * 
+     * @param int $id EventId (Primary key)
+     * 
+     * @return SimpleCal_Model_Event 
+     */
+    public static function getInstanceById($id) {
+         $table = new SimpleCal_Model_DbTable_Events();
+         $rowset = $table->find($id);
+         if (count($rowset) < 1) throw new SimpleCal_Exception("Unable to find Event for id [$id]");
+         $row = current($rowset);
+         return new self($row[0]);   
+    }
+    
+    public static function getInstanceByForm(SimpleCal_Form_Event $form) {
+        $data = $form->getValues();
+        $startTime = strtotime($data['date'] . " " . $data['time']);
+
+        $data['start_time'] = $startTime;
+        $data['end_time'] = $startTime + 1800; // TODO: Implement this!    
+        
+        return new self($data);
     }
 }

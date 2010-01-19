@@ -5,6 +5,8 @@ CREATE TABLE events (
   start_time INTEGER UNSIGNED NOT NULL,
   end_time INTEGER UNSIGNED,
   title VARCHAR(150) NOT NULL,
+  reminder INTEGER UNSIGNED,
   description TEXT,
+  invite TEXT,
   flags SMALLINT UNSIGNED
 );
