@@ -6,9 +6,12 @@ A simple Zend Framework and Zend Server APIs based calendar application,
 built in order to demonstrate these two products and the possible 
 integration between them. 
 
-Zend Simple Calendar is copyright (C) 2009 Zend Technologies LTD
+Zend Simple Calendar is copyright (C) 2009-2010 Zend Technologies LTD
 Please see LICENSE for licensing information
 
-++++++++++++++++++++
-forked by Jan Burkl
+Authors 
+-------
+- Jan Burkl
+- Sam Hennesy 
+- Shahar Evron
 
